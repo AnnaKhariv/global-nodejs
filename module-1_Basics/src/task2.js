@@ -1,10 +1,10 @@
-const fs = require('fs');
-const csvtojson = require("csvtojson");
-const inputPath ='./csv/node_mentoring_t1_2_input_example.csv';
-const outputPath ='./txt/node_mentoring_t1_2_outut_example.txt';
+var fs = require('fs');
+var csvtojson = require("csvtojson");
+var inputPath ='./csv/node_mentoring_t1_2_input_example.csv';
+var outputPath ='./txt/node_mentoring_t1_2_outut_example.txt';
 
-const readable = fs.createReadStream(inputPath);
-const writable = fs.createWriteStream(outputPath);
+var readable = fs.createReadStream(inputPath);
+var writable = fs.createWriteStream(outputPath);
 
 //READABLE
 readable.on('open', function() {

@@ -4,20 +4,35 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "task1": "nodemon task1.js",
-    "task2": "nodemon task2.js",
-    "task3": "nodemon task3.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src/**/* -d dist",
+    "watch": "babel src/ -d dist -w",
+    "task1": "nodemon src/task1.js",
+    "task2": "nodemon src/task2.js",
+    "task3": "nodemon src/task3.js "
   },
-  "author": "",
+  "author": "Anna Khariv",
   "license": "ISC",
   "dependencies": {
-    "csvtojson": "^2.0.10",
+    "csvtojson": "^2.0.10"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
     "nodemon": "^2.0.1"
   },
   "nodemonConfig": {
+    "exec": "npm run build",
     "ignore": [
       "node_modules/*"
-    ]
+    ],
+    "watch": "src/"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": []
   }
 }
