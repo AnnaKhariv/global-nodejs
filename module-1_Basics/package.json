@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel src/**/* -d dist",
-    "watch": "babel src/ -d dist -w",
+    "build": "babel src -d dist --copy-files --verbose",
+    "watch": "babel src -d dist --copy-files -w",
     "task1": "nodemon src/task1.js",
     "task2": "nodemon src/task2.js",
-    "task3": "nodemon src/task3.js "
+    "task3": "nodemon --exec babel-node -- src/task3.js"
   },
   "author": "Anna Khariv",
   "license": "ISC",
@@ -23,16 +23,17 @@
     "nodemon": "^2.0.1"
   },
   "nodemonConfig": {
-    "exec": "npm run build",
     "ignore": [
-      "node_modules/*"
+      "node_modules/"
     ],
-    "watch": "src/"
+    "watch": "src/**/*"
   },
   "babel": {
     "presets": [
       "@babel/preset-env"
     ],
-    "plugins": []
+    "ignore": [
+      "node_modules/"
+    ]
   }
 }
