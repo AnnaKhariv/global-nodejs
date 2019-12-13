@@ -18,7 +18,7 @@ writable
   .on('open', () => console.info(`Start writing data to ${outputPath}`))
   .on('finish', () => console.info(`Finish writing data to ${outputPath}`))
   .on('close', () => console.info('Writing stream has been destroyed and file has been closed'))
-  .on('error', (err) => console.error(`Unable to write data to ${outputPath}`, err);
+  .on('error', (err) => console.error(`Unable to write data to ${outputPath}`, err));
 
 readable.pipe(csvtojson()).pipe(writable);
 
@@ -26,21 +26,9 @@ readable.pipe(csvtojson()).pipe(writable);
 const encoding = 'utf8';
 process.stdin.setEncoding(encoding);
 
-const reverse = (data) => {
-  const reversedData = [];
-  const array = data.split('');
-  array.pop();
-
-  for(let i = 0; i < array.length; i++) {
-    reversedData.unshift(array[i]);
-  }
-
-  return reversedData.join('');
-};
-
 process.stdin.on('readable', (chunk) => {
   while ((chunk = process.stdin.read()) !== null) {
-    process.stdout.write(`${reverse(chunk)}\n\n`);
+    process.stdout.write(`${chunk.split('').reverse().join('')}\n\n`);
   }
 });
 
