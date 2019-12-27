@@ -1,15 +1,19 @@
 import express from 'express';
-export const router = express.Router();
+import { saveUser, updateUser, getUser, getAutoSuggestUsers, removeUser } from './services';
+import { userSchema, validationHandlerMiddleware} from './validation';
 
-import { saveUser } from '../services'
+const router = express.Router();
 
-// router.get('/', function(req, res) {
-//     res.send('Birds home page');
-// });
+router.post('/user', validationHandlerMiddleware(userSchema, 'body'), saveUser);
 
-// router.get('/about', function(req, res) {
-//     res.send('About birds');
-// });
+router.post('/user/:id', updateUser);
 
+router.get('/user/:id', getUser);
 
-router.post('/user', saveUser);
+router.get('/users/:limit', getAutoSuggestUsers);
+
+router.delete('/user/:id', removeUser);
+
+export {
+    router
+};
