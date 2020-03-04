@@ -1,5 +1,5 @@
 export class HttpRequestError extends Error {
-    constructor (public status: number,...args) {
+    constructor(public status: number, ...args) {
         super(...args);
 
         this.name = 'HttpRequestError';

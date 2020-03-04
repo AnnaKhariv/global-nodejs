@@ -1,6 +1,6 @@
 import express from 'express';
 import { saveUser, updateUser, getUser, removeUser, getUsers } from './services';
-import { userSchema, validationHandlerMiddleware} from './validation';
+import { userSchema, validationHandlerMiddleware } from './validation';
 
 export const router = express.Router();
 

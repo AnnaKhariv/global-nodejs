@@ -24,34 +24,31 @@ const isUserExist = (id: string): number => {
         throw new HttpRequestError(404, `Unable to find record with id = ${id}`);
     }
     return index;
-}
+};
 
 const uploadUser = (user: User, index?: number) => {
-    if(index !== undefined) {
+    if (index !== undefined) {
         users[index] = user;
         return;
     }
 
-    try {
-        isUserUnique(user.id);
-         users.push(user);
-    } catch (err) {
-        throw err;
-    }
-}
+
+    isUserUnique(user.id);
+    users.push(user);
+};
 
 const downloadUser = (index: number): User => users[index];
 
 const deleteUser = (index: number): User => {
     users[index].isDeleted = true;
     return users[index];
-}
+};
 
 const isUserUnique = (id: string) => {
     if (findIndex(users, id) !== -1) {
         throw new HttpRequestError(409, `User with id = ${id} already exist`);
     }
-}
+};
 
 export {
     getAutoSuggestUsers,
