@@ -1,37 +1,51 @@
 import { Request, Response, NextFunction } from 'express';
-import { ValidatedRequest } from 'express-joi-validation';
-import { userSchema } from './validation';
-import express from 'express';
-import { errorHandlerMiddleware } from './error-handling';
-const users = [];
+import { User } from '../entity/user.entity'
+import { getAutoSuggestUsers, isUserExist, uploadUser, downloadUser, deleteUser } from '../db';
+
+const SUCCESS = 201;
 
 const saveUser = (req: Request, res: Response, next: NextFunction) => {
-   // errorHandlerMiddleware(userValidationSchema, req.body);
-    console.log(req.body)
-    //res.status(201).json(req.body);
-    throw new Error('Error');
+    const user: User = req.body;
+    uploadUser(user);
+    res.status(SUCCESS).json(user);
 };
 
-const updateUser = (req: Request, res: Response) => {
-    console.log(req.body);
-    res.status(201).json("req.body");
+const updateUser = (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const user: User = req.body;
+    try {
+        const index = isUserExist(id);
+        uploadUser(user, index);
+        res.status(SUCCESS).json(user);
+    } catch (err) {
+        next(err);
+    }
 };
 
-const getUser = (req: Request, res: Response) => {
-    console.log(req.body);
-    res.status(201).json("req.body");
+const getUser = (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+        const index = isUserExist(id);
+        res.status(SUCCESS).json(downloadUser(index));
+    } catch (err) {
+        next(err);
+    }
 };
 
-// sorted by login property and filtered by loginSubstringin the login property
-
-const getAutoSuggestUsers = (req, res) => {
-    console.log(req.body);
-    res.status(201).json("req.body");
+const getUsers = (req: Request, res: Response, next: NextFunction) => {
+    const { limit, loginSubstring } = req.query;
+    res.status(SUCCESS).json(getAutoSuggestUsers(limit, loginSubstring));
 };
 
-const removeUser = (req:  express.Request, res:  express.Request) => {
-    console.log(req.body);
-    //res.status(201).json("req.body");
+const removeUser = (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+        const index = isUserExist(id);
+        const deletedUser = deleteUser(index);
+        res.status(SUCCESS).json(deletedUser);
+    } catch (err) {
+        next(err);
+    }
 };
 
 export {
@@ -39,5 +53,6 @@ export {
     updateUser,
     getUser,
     getAutoSuggestUsers,
+    getUsers,
     removeUser
-}
+};
