@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "paths": { "*": ["types/*"] },
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "removeComments": false,
+      "baseUrl": ".",
+      "outDir": "build/",
+      "target": "es5",
+      "noImplicitAny": false, // true
+      "sourceMap": true,
+      "resolveJsonModule": true,
+    },
+    "lib": [
+      "dom",
+      "esnext",
+    ],
+    "include": [
+      "src/**/*.ts",
+    ],
+    "exclude": [
+      "src/**/*.spec.ts",
+      "node_modules/"
+    ]
+  }
