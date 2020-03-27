@@ -1,9 +1,9 @@
 import { QueryInterface, DataTypes } from 'sequelize';
 
 export = {
-    up: (queryInterface: QueryInterface) => queryInterface.createTable('Users', {
+    up: (queryInterface: QueryInterface) => queryInterface.createTable('User', {
         id: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true
         },
@@ -20,14 +20,13 @@ export = {
             allowNull: false
         },
         age: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.INTEGER
         },
         isDeleted: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         }
     }),
-    down: (queryInterface: QueryInterface) =>  queryInterface.dropTable('Users')
+    down: (queryInterface: QueryInterface) =>  queryInterface.dropTable('User')
 }
 

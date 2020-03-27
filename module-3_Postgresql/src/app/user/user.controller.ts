@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserService } from './user.service';
-import { User } from '../../entities/user.entity';
+import { UserEntity as User } from '../../entities/user.entity';
 
 export class UserController {
     private readonly SUCCESS = 201;

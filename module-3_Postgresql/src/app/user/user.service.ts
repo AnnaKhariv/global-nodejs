@@ -1,15 +1,17 @@
-import { Sequelize, ModelCtor, Model, Op } from 'sequelize';
-import { User } from '../../entities/user.entity';
+import { Op } from 'sequelize';
+import { Sequelize, Repository } from 'sequelize-typescript';
+import User from '../../db/models/user.model';
+import { UserEntity } from '../../entities/user.entity';
 import { HttpRequestError } from '../../errors';
 import { config } from '../../config';
 
 export class UserService {
     constructor(
         private readonly db: Sequelize,
-        private readonly model: ModelCtor<Model<User>> = db.models.Users
+        private readonly model: Repository<User> = db.getRepository(User)
     ) {}
 
-    upsertUser = async (user: User) => this.model.upsert(user, { returning: true });
+    upsertUser = async (user: UserEntity) => this.model.upsert(user, { returning: true });
 
     getUserByPk = async (id: string) => {
         const record = await this.model.findByPk(id);
@@ -21,7 +23,7 @@ export class UserService {
 
     deleteUser = async (id: string) => {
         const searchedUser = await this.getUserByPk(id);
-        const rawUser: User = Object.create(searchedUser.toJSON());
+        const rawUser: UserEntity = Object.create(searchedUser.toJSON());
         rawUser.isDeleted = true;
         return this.upsertUser(rawUser);
     };

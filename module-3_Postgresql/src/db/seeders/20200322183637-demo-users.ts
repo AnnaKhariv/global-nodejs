@@ -75,6 +75,6 @@ const users = [
 ];
 
 export = {
-    up: (queryInterface: QueryInterface) => queryInterface.bulkInsert('Users', users, {}),
-    down: (queryInterface: QueryInterface) => queryInterface.bulkDelete('Users', null, {})
+    up: (queryInterface: QueryInterface) => queryInterface.bulkInsert('User', users, {}),
+    down: (queryInterface: QueryInterface) => queryInterface.bulkDelete('User', null, {})
 };
