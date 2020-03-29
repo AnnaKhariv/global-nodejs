@@ -4,6 +4,7 @@ import Group from '../../db/models/group.model';
 import { GroupEntity } from '../../entities/group.entity';
 import { UserGroupEntity } from '../../entities/user-group.enitity';
 import { HttpRequestError } from '../../errors';
+import log from '../../logger';
 
 export class GroupService {
     constructor(
@@ -23,7 +24,7 @@ export class GroupService {
             for (const userId of usersIds) {
                 const userRecord =  await this.db.models.User.findByPk(userId, { transaction });
                 if (!userRecord) {
-                    console.error(new HttpRequestError(404, `Unable to find record with id = ${userId}`));
+                    log.warn(new HttpRequestError(404, `Unable to find record with id = ${userId}`));
                     break;
                 }
 
@@ -37,7 +38,7 @@ export class GroupService {
             return upsertedGroup;
 
         } catch (err) {
-            console.log(err)
+            log.error(err);
             if (transaction) await transaction.rollback();
             throw new HttpRequestError(422, `Unable to save record = ${JSON.stringify(group)}`);
         }
