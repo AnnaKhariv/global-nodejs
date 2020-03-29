@@ -29,14 +29,13 @@ export class GroupService {
                 }
 
                 const userGroup: UserGroupEntity = {
-                    userId: userId,
+                    userId,
                     groupId: group.id
                 };
                 await this.db.models.UserGroup.upsert(userGroup, { transaction });
             }
             await transaction.commit();
             return upsertedGroup;
-
         } catch (err) {
             log.error(err);
             if (transaction) await transaction.rollback();
@@ -45,9 +44,9 @@ export class GroupService {
     };
 
     getGroups = async () => this.model.findAll({ include: [{
-            model: this.db.models.User,
-            through: { attributes: [] }
-        }]
+        model: this.db.models.User,
+        through: { attributes: [] }
+    }]
     });
 
     getGroupByPk = async (id: string) => {
@@ -61,6 +60,6 @@ export class GroupService {
 
     deleteGroup = async (id: string) => {
         await this.getGroupByPk(id);
-        return this.model.destroy({ where: { id }});
+        return this.model.destroy({ where: { id } });
     };
 }

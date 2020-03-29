@@ -8,7 +8,7 @@ export const loggerHandlerMiddleware = (req: Request, res: Response, next: NextF
         path,
         args: params || query || {},
         body
-    }
-    log.info( metadata, 'Request: ');
+    };
+    log.info(metadata, 'Request: ');
     return next();
 };

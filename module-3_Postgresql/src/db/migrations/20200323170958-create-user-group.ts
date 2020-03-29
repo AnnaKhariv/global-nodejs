@@ -10,8 +10,8 @@ export = {
         userId: {
             type: DataTypes.UUID,
             references: {
-              model: 'User',
-              key: 'id'
+                model: 'User',
+                key: 'id'
             },
             allowNull: false
         },
@@ -22,7 +22,7 @@ export = {
                 key: 'id'
             },
             allowNull: false
-        },
+        }
     }),
     down: (queryInterface: QueryInterface) =>  queryInterface.dropTable('UserGroup')
 }
