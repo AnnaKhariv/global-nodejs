@@ -1,12 +1,27 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserService } from './user.service';
-import { UserEntity as User } from '../../entities/user.entity';
+import { UserEntity as User, UserLoginEntity } from '../../entities/user.entity';
+import { HttpRequestError } from '../../errors';
 
 export class UserController {
     private readonly SUCCESS = 201;
     constructor(
         public readonly service: UserService
     ) {}
+
+    login = async (req: Request, res: Response, next: NextFunction) => {
+        const userCredentials: UserLoginEntity = req.body;
+        try {
+            const user = await this.service.findOneByField({ login: userCredentials.login});
+            const token = this.service.getToken(user, userCredentials);
+            res.status(this.SUCCESS).json({
+                status: 'Authorized',
+                token
+            });
+        } catch (err) {
+            return next(err);
+        }
+    };
 
     saveUser = async (req: Request, res: Response, next: NextFunction) => {
         const user: User = req.body;
