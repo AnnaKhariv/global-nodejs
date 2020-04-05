@@ -14,7 +14,7 @@ export class UserService {
     ) {}
 
     getToken = (user: User, userCredentials: UserLoginEntity): string => {
-        if(user.password !== userCredentials.password) {
+        if (user.password !== userCredentials.password) {
             throw new HttpRequestError(403, `Password don't match for ${userCredentials.login}`);
         }
 

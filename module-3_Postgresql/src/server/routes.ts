@@ -11,7 +11,6 @@ export class Router {
         private readonly groupController: GroupController,
         readonly router: express.Router = express.Router()
     ) {
-
         router.post('/user/login',
             validationHandlerMiddleware(userLoginSchema, 'body'), this.userController.login);
 

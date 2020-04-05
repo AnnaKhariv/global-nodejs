@@ -14,11 +14,11 @@ export const authHandlerMiddleware = (req: Request, res: Response, next: NextFun
     }
 
     const token = req.headers[authConfig.header] as string;
-    if(token) {
+    if (token) {
         try {
             jwt.verify(token, authConfig.secret, { algorithms: ['HS256'] });
             return next();
-        } catch(err) {
+        } catch (err) {
             throw new CustomError(403, 'Forbidden Error', 'HTTPAuthorization header has invalid JWTtoken');
         }
     }
