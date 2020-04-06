@@ -1,26 +1,28 @@
 {
     "compilerOptions": {
         "paths": { "*": ["types/*"] },
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "removeComments": false,
-      "baseUrl": ".",
-      "outDir": "build/",
-      "target": "es5",
-      "noImplicitAny": false, // true
-      "sourceMap": true,
-      "resolveJsonModule": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "removeComments": false,
+        "baseUrl": ".",
+        "outDir": "build/",
+        "target": "es6",
+        "noImplicitAny": false, // true
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
     },
     "lib": [
-      "dom",
-      "esnext",
+        "dom",
+        "esnext",
     ],
     "include": [
-      "src/**/*.ts",
+        "src/**/*.ts",
     ],
     "exclude": [
-      "src/**/*.spec.ts",
-      "node_modules/"
+        "src/**/*.spec.ts",
+        "node_modules/"
     ]
-  }
+}

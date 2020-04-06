@@ -1,10 +1,13 @@
-import { Model } from 'sequelize';
-
-export interface User extends Model {
-    name: string;
+export interface UserEntity {
     id: string;
+    name: string;
     login: string;
     password: string;
     age: number;
     isDeleted: boolean;
+}
+
+export interface UserLoginEntity {
+    login: string;
+    password: string;
 }
