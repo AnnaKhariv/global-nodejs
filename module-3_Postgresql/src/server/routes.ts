@@ -1,7 +1,7 @@
 import express from 'express';
 import { validationHandlerMiddleware } from '../middleware/validation-handling.middleware';
 import { UserController } from '../app/user/user.controller';
-import { userSchema } from '../app/user/user.validation';
+import { userSchema, userLoginSchema } from '../app/user/user.validation';
 import { GroupController } from '../app/group/group.controller';
 import { groupSchema } from '../app/group/group.validation';
 
@@ -11,6 +11,9 @@ export class Router {
         private readonly groupController: GroupController,
         readonly router: express.Router = express.Router()
     ) {
+        router.post('/user/login',
+            validationHandlerMiddleware(userLoginSchema, 'body'), this.userController.login);
+
         router.post('/user',
             validationHandlerMiddleware(userSchema, 'body'), this.userController.saveUser);
 

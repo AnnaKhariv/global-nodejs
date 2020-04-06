@@ -1,4 +1,4 @@
-
+import log from './logger';
 import { initDb } from './db/models';
 import { startServer, stopServer } from './server';
 
@@ -7,7 +7,7 @@ import { startServer, stopServer } from './server';
         const connection = await initDb();
         await connection.authenticate();
         await startServer(connection);
-        console.log('Connection has been established successfully');
+        log.info('Connection has been established successfully');
     } catch (err) {
         stopServer(err);
     }

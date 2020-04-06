@@ -18,6 +18,7 @@ export const dbConfig: DbConfig = {
             ssl: true
         },
         models: [path.resolve(__dirname, '../', `db/models/**.model${extension()}`)],
-        repositoryMode: true
+        repositoryMode: true,
+        logging: false
     }
 };
