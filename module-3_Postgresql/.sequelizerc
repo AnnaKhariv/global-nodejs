@@ -1,0 +1,9 @@
+const path = require('path');
+
+module.exports = {
+  'url': 'postgres://hgetrgyw:bDWXfPJU57QaF0GuFfrx7_Ko-22qGHj2@drona.db.elephantsql.com:5432/hgetrgyw',
+  'config': path.resolve('src/config', 'db.json'),
+  'models-path': path.resolve('src/db/models'),
+  'seeders-path': path.resolve('src/db/seeders'),
+  'migrations-path': path.resolve('src/db/migrations')
+}

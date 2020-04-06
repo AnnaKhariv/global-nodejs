@@ -1,0 +1,15 @@
+{
+    "development": {
+      "username": "hgetrgyw",
+      "password": "bDWXfPJU57QaF0GuFfrx7_Ko-22qGHj2",
+      "database": "hgetrgywt",
+      "host": "drona.db.elephantsql.com",
+      "dialect": "postgres",
+      "ssl": true,
+      "dialectOptions": {
+        "ssl": true
+      }
+    },
+    "test": {},
+    "production": {}
+  }
