@@ -14,8 +14,9 @@ export const errorHandlerMiddleware = (err: any | ValidationError, req: Request,
             break;
         default: {
             const status = err.status && err.status || 500;
+            const message = err.message && err.message || 'Internal Server Error';
             log.error(err, err.message);
-            res.status(status).json({ Error: err.message });
+            res.status(status).json({ [err.name]: message });
         }
     }
     next();

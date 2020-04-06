@@ -12,3 +12,8 @@ export const userSchema: Joi.Schema = Joi.object().keys({
         .required(),
     isDeleted: Joi.boolean().required()
 });
+
+export const userLoginSchema: Joi.Schema = Joi.object().keys({
+    login: Joi.string().required(),
+    password: Joi.string().alphanum().min(6).required()
+});

@@ -6,3 +6,8 @@ export interface UserEntity {
     age: number;
     isDeleted: boolean;
 }
+
+export interface UserLoginEntity {
+    login: string;
+    password: string;
+}
